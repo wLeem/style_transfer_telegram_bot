@@ -57,41 +57,46 @@ dct = {}
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
     random_number = random.randint(0, 10000)
+    await bot.send_message(msg.from_user.id, 'Зашел в функцию')
     if len(a) == 2:
         a.clear()
 
     download_dir = './img/'
     if not os.path.exists(download_dir):
         os.makedirs(download_dir)
+        await bot.send_message(msg.from_user.id, 'Создал папку')
     img_name = 'img' + str(msg.from_user.id) + str(random_number) + '.jpg'
     path_to_img = os.getcwd() + '\\img\\' + img_name
     a.append(path_to_img)
     await msg.photo[-1].download('./img/' + img_name)
     if len(a) == 2:
-        print('begin reading')
+        await bot.send_message(msg.from_user.id, 'Зашел в обработку')
+        # print('begin reading')
         # input_img = cv2.imread(a[0], 1)
         # content_img = cv2.imread(a[0], 1)
         # style_img = cv2.imread(a[1], 1)
-        print('begin resize')
+        # print('begin resize')
         # input_img, content_img, style_img = resize_photo(a)
-        print('begin transforming')
+        # print('begin transforming')
         # output = cv2.imread(a[1], 1)
 
         # print('begin transfer 1st model')
         # start_time_1 = time.time()
         # output = transforming(a)
         # end_time_1 = time.time()
-        print('begin transfer 2st model')
-        start_time_2 = time.time()
+        # print('begin transfer 2st model')
+        # start_time_2 = time.time()
+        await bot.send_message(msg.from_user.id, 'начал обработку')
         out = transfering_style(a)
-        end_time_2 = time.time()
+        await bot.send_message(msg.from_user.id, 'Закончил обработку')
+        # end_time_2 = time.time()
 
         # print('Inference 1st model is:', end_time_1-start_time_1)
-        print('Inference 2st model is:', end_time_2 - start_time_2)
+        # print('Inference 2st model is:', end_time_2 - start_time_2)
 
-        print('begin saving')
+        # print('begin saving')
         # print(output.shape)
-        print(out.shape)
+        # print(out.shape)
 
         # output = output.cpu().clone().detach()
         out = out.cpu().clone().detach()
@@ -104,21 +109,21 @@ async def handle_docs_photo(msg):
         save_image(img1, './img/' + 'saving_photo_2.jpg')
         path_save_img_2 = './img/' + 'saving_photo_2.jpg'
 
-        print('end saving')
+        # print('end saving')
         # photo(path_save_img)
         # await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img_1))
         await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img_2))
         # await msg.answer('Фото прислано')
         await bot.send_message(msg.from_user.id, 'Фото готово и прислано Вам')
-        print('end of working')
-        print('begin removing')
+        # print('end of working')
+        # print('begin removing')
         try:
             os.remove(a[0])
             os.remove(a[1])
             os.remove('./img/' + 'saving_photo_2.jpg')
         except:
             FileNotFoundError
-        print('end removing')
+        # print('end removing')
 
 
 @dp.message_handler()

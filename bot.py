@@ -39,7 +39,7 @@ async def send_welcome(message: types.Message):
 
 
 @dp.message_handler(commands=['help'])
-async def send_welcome(message: types.Message):
+async def send_help(message: types.Message):
     await message.reply(
         "Привет! Давайте попробуем разобраться, что у Вас не получается. Вы можете прислать два изображения и бот "
         "с первой фотографии перенесёт стиль на вторую, после чего отправит получившееся изображение Вам. "
@@ -50,16 +50,16 @@ async def send_welcome(message: types.Message):
     )
 
 @dp.message_handler(commands=['file_in_directory'])
-async def handle_docs_photo(message: types.Message):
+async def handle_docs_dir(message: types.Message):
     await message.reply('Я сейчас в директории: ' + os.getcwd())
     files = os.listdir(os.getcwd())
     for file in files:
         await message.reply('Файл : ' + file)
 
 
-async def handle_docs_photo(message: types.Message):
-    if "Удалить файл" in message.text:
-        os.remove(message.text.split(':')[1])
+# async def handle_docs_photo(message: types.Message):
+#     if "Удалить файл" in message.text:
+#         os.remove(message.text.split(':')[1])
 
 
 a = []
@@ -127,6 +127,9 @@ async def echo(message: types.Message):
         await message.reply("И Вам привет! "
                             "Если хотите узнать, что я могу напишите '/start' или '/help'. "
                             "Либо можем просто поболтать, Вы отправляйте сообщение, а я буду повторять!")
+    elif "Удалить файл:" in message.text:
+        os.remove(message.text.split(':')[1])
+        await message.reply("Удалил")
     else:
         await message.reply(message.text)
 

@@ -66,7 +66,8 @@ async def handle_docs_photo(msg):
     if not os.path.exists(download_dir):
         os.makedirs(download_dir)
         await bot.send_message(msg.from_user.id, 'Создал папку  ' + str(os.getcwd()))
-
+    os.chdir(download_dir)
+    await bot.send_message(msg.from_user.id, 'В директории я сейчас  ' + str(os.getcwd()))
     img_name = 'img' + str(msg.from_user.id) + str(random_number) + '.jpg'
     path_to_img = os.getcwd() + '\\img\\' + img_name
     a.append(path_to_img)

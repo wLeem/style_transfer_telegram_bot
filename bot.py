@@ -57,37 +57,28 @@ dct = {}
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
     random_number = random.randint(0, 10000)
-    await bot.send_message(msg.from_user.id, 'Зашел в функцию')
+    # await bot.send_message(msg.from_user.id, 'Зашел в функцию')
     if len(a) == 2:
         a.clear()
+        await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     download_dir = './img/'
     if not os.path.exists(download_dir):
         os.makedirs(download_dir)
-        await bot.send_message(msg.from_user.id, 'Создал папку')
+        await bot.send_message(msg.from_user.id, 'Создал папку  ' + str(os.getcwd()))
+
     img_name = 'img' + str(msg.from_user.id) + str(random_number) + '.jpg'
     path_to_img = os.getcwd() + '\\img\\' + img_name
     a.append(path_to_img)
     await msg.photo[-1].download('./img/' + img_name)
     if len(a) == 2:
         await bot.send_message(msg.from_user.id, 'Зашел в обработку')
-        # print('begin reading')
-        # input_img = cv2.imread(a[0], 1)
-        # content_img = cv2.imread(a[0], 1)
-        # style_img = cv2.imread(a[1], 1)
-        # print('begin resize')
-        # input_img, content_img, style_img = resize_photo(a)
-        # print('begin transforming')
-        # output = cv2.imread(a[1], 1)
 
-        # print('begin transfer 1st model')
-        # start_time_1 = time.time()
         # output = transforming(a)
-        # end_time_1 = time.time()
-        # print('begin transfer 2st model')
-        # start_time_2 = time.time()
-        await bot.send_message(msg.from_user.id, 'начал обработку')
+
+        await bot.send_message(msg.from_user.id, 'Начал обработку')
         out = transfering_style(a)
+        await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
         await bot.send_message(msg.from_user.id, 'Закончил обработку')
         # end_time_2 = time.time()
 

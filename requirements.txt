@@ -19,8 +19,6 @@ numpy==1.22.1
 opencv-python==4.5.5.62
 Pillow==9.0.0
 pytz==2021.3
-sip==4.19.13
-terminado==0.9.4
 torch==1.10.1+cpu
 torchvision==0.11.2+cpu
 typing_extensions==4.0.1

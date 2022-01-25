@@ -49,7 +49,7 @@ async def send_welcome(message: types.Message):
         "любое сообщение и бот пришлет его Вам в ответ."
     )
 
-@dp.message_handler(content_types=['file_in_directory'])
+@dp.message_handler(commands=['file_in_directory'])
 async def handle_docs_photo(message: types.Message):
     await message.reply('Я сейчас в директории: ', os.getcwd())
     files = os.listdir(os.getcwd())

@@ -90,6 +90,9 @@ async def handle_docs_photo(msg):
     if len(a) == 2:
         await bot.send_message(msg.from_user.id, 'Зашел в обработку')
         await bot.send_message(msg.from_user.id, 'Начал обработку')
+        await bot.send_message(msg.from_user.id, 'Длина массива в цикле при переносе ' + str(len(a)))
+        await bot.send_message(msg.from_user.id, 'Первый элемент ' + a[0])
+        await bot.send_message(msg.from_user.id, 'Второй элемент  ' + a[1])
         out = transfering_style(a)
         await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
         await bot.send_message(msg.from_user.id, 'Закончил обработку')

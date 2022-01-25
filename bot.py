@@ -68,9 +68,10 @@ dct = {}
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
     random_number = random.randint(0, 10000)
-    # await bot.send_message(msg.from_user.id, 'Зашел в функцию')
+
     if len(a) == 2:
         a.clear()
+        await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # download_dir = './img/'
     # if not os.path.exists(download_dir):
@@ -79,17 +80,15 @@ async def handle_docs_photo(msg):
     # os.chdir(download_dir)
 
     # '/app'
-    await bot.send_message(msg.from_user.id, 'В директории я сейчас  ' + str(os.getcwd()))
+    await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
 
     img_name = 'img' + str(msg.from_user.id) + str(random_number) + '.jpg'
     path_to_img = os.getcwd() + '/' + img_name
     a.append(path_to_img)
     await msg.photo[-1].download(path_to_img)
+    await bot.send_message(msg.from_user.id, 'Длина массива сейчас ' + str(len(a)))
     if len(a) == 2:
         await bot.send_message(msg.from_user.id, 'Зашел в обработку')
-
-        # output = transforming(a)
-
         await bot.send_message(msg.from_user.id, 'Начал обработку')
         out = transfering_style(a)
         await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
@@ -97,26 +96,17 @@ async def handle_docs_photo(msg):
 
         out = out.cpu().clone().detach()
 
-        # img1 = output[0]
-        # save_image(img1, './img/' + 'saving_photo_1.jpg')
-        # path_save_img_1 = './img/' + 'saving_photo_1.jpg'
-
         img = out[0]
-        save_image(img, '/app/' + 'saving_photo.jpg')
         path_save_img = '/app/' + 'saving_photo.jpg'
+        save_image(img, path_save_img)
 
-        # print('end saving')
-        # photo(path_save_img)
-        # await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img_1))
         await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img))
-        # await msg.answer('Фото прислано')
         await bot.send_message(msg.from_user.id, 'Фото готово и прислано Вам')
-        # print('end of working')
-        # print('begin removing')
         try:
             os.remove(a[0])
             os.remove(a[1])
             os.remove('/app/' + 'saving_photo.jpg')
+            await bot.send_message(msg.from_user.id, 'Удалил все файлы')
         except:
             FileNotFoundError
 

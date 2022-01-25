@@ -48,9 +48,9 @@ def denorm(tensor, device):
 
 def transfering_style(massiv_photo):
     model = model_adain.Model()
-    model.load_state_dict(torch.load(''))
-    c = Image.open(massiv_photo[0])
-    s = Image.open(massiv_photo[1])
+    model.load_state_dict(torch.load('20_epoch.pth', map_location=torch.device('cpu')))
+    c = Image.open(massiv_photo[1])
+    s = Image.open(massiv_photo[0])
     c_tensor = trans(c).unsqueeze(0).to(device)
     s_tensor = trans(s).unsqueeze(0).to(device)
     alpha = 1

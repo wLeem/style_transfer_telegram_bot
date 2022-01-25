@@ -49,10 +49,21 @@ async def send_welcome(message: types.Message):
         "любое сообщение и бот пришлет его Вам в ответ."
     )
 
+@dp.message_handler(content_types=['file_in_directory'])
+async def handle_docs_photo(message: types.Message):
+    await message.reply('Я сейчас в директории: ', os.getcwd())
+    files = os.listdir(os.getcwd())
+    for file in files:
+        await message.reply('Файл : ', file)
+
+
+async def handle_docs_photo(message: types.Message):
+    if "Удалить файл" in message.text:
+        os.remove(message.text.split(':')[1])
+
 
 a = []
 dct = {}
-
 
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
@@ -68,7 +79,7 @@ async def handle_docs_photo(msg):
     #     await bot.send_message(msg.from_user.id, 'Создал папку  ' + str(os.getcwd()))
     # os.chdir(download_dir)
 
-    '/app'
+    # '/app'
     await bot.send_message(msg.from_user.id, 'В директории я сейчас  ' + str(os.getcwd()))
 
     img_name = 'img' + str(msg.from_user.id) + str(random_number) + '.jpg'

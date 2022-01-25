@@ -51,10 +51,10 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(commands=['file_in_directory'])
 async def handle_docs_photo(message: types.Message):
-    await message.reply('Я сейчас в директории: ', os.getcwd())
+    await message.reply('Я сейчас в директории: ' + os.getcwd())
     files = os.listdir(os.getcwd())
     for file in files:
-        await message.reply('Файл : ', file)
+        await message.reply('Файл : ' + file)
 
 
 async def handle_docs_photo(message: types.Message):
@@ -71,7 +71,6 @@ async def handle_docs_photo(msg):
     # await bot.send_message(msg.from_user.id, 'Зашел в функцию')
     if len(a) == 2:
         a.clear()
-        await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # download_dir = './img/'
     # if not os.path.exists(download_dir):

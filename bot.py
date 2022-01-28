@@ -67,7 +67,7 @@ a = []
 dct = {}
 
 
-# @dp.message_handler(commands=['clean_massiv'])
+@dp.message_handler(commands=['clean_massiv'])
 def clean_massiv():
     global a
     a = []
@@ -81,10 +81,10 @@ def clean_massiv():
 
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
-    # clean_massiv()
-    # if len(a) == 2:
-    #     a.clear()
-    #     await bot.send_message(msg.from_user.id, 'Очистил массив')
+
+    if len(a) >= 2:
+        clean_massiv()
+        await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # '/app'
     await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))

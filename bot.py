@@ -82,7 +82,6 @@ async def clean_massiv(message: types.Message):
 
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
-    # random_number = random.randint(0, 10000)
 
     if len(a) == 2:
         a.clear()

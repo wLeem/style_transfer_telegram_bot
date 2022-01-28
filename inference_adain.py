@@ -51,6 +51,9 @@ def transfering_style(massiv_photo):
     model.load_state_dict(torch.load('20_epoch.pth', map_location=torch.device('cpu')))
     c = Image.open(massiv_photo[1])
     s = Image.open(massiv_photo[0])
+    size = 650, 650
+    c.thumbnail(size, Image.ANTIALIAS)
+    s.thumbnail(size, Image.ANTIALIAS)
     c_tensor = trans(c).unsqueeze(0).to(device)
     s_tensor = trans(s).unsqueeze(0).to(device)
     alpha = 1

@@ -34,8 +34,7 @@ async def send_welcome(message: types.Message):
         "Привет! Я могу перенести стиль с одной картинки на другую. "
         "Пришли мне две фотографии: с первой фотографии я попробую перенсти "
         "стиль на вторую, и отправлю получившееся изображение Вам в ответ. "
-        "Если что, то обработка может занимать достаточно много времени (более 2-3х минут). "
-        "Я сейчас в директории "
+        "Если что, то обработка может занимать достаточно много времени (но не более 2-3х минут)."
     )
 
 
@@ -44,7 +43,7 @@ async def send_help(message: types.Message):
     await message.reply(
         "Привет! Давайте попробуем разобраться, что у Вас не получается. Вы можете прислать два изображения и бот "
         "с первой фотографии перенесёт стиль на вторую, после чего отправит получившееся изображение Вам. "
-        "Если что, то обработка в среднем занимает не больше 30 секунд, но может и больше, поэтому если изображение "
+        "Если что, то обработка в среднем занимает не больше минуты, но может и больше, поэтому если изображение "
         "не приходит быстро, пожалуйста подождите чуть больше. Также не стоит отправлять новые изображения пока бот не"
         " обработал предыдущие. Чтобы проверить, что бот работает, Вы можете написать "
         "любое сообщение и бот пришлет его Вам в ответ."
@@ -68,24 +67,24 @@ a = []
 dct = {}
 
 
-@dp.message_handler(commands=['clean_massiv'])
-async def clean_massiv(message: types.Message):
+# @dp.message_handler(commands=['clean_massiv'])
+def clean_massiv():
     global a
     a = []
-    await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
+    # await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
     files = os.listdir(os.getcwd())
     for file in files:
         if ".jpg" in file:
-            await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
+            # await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
             os.remove('/app/' + file)
 
 
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
-
-    if len(a) == 2:
-        a.clear()
-        await bot.send_message(msg.from_user.id, 'Очистил массив')
+    # clean_massiv()
+    # if len(a) == 2:
+    #     a.clear()
+    #     await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # '/app'
     await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
@@ -116,13 +115,15 @@ async def handle_docs_photo(msg):
 
         await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img))
         await bot.send_message(msg.from_user.id, 'Фото готово и прислано Вам')
-        try:
-            os.remove(a[0])
-            os.remove(a[1])
-            os.remove('/app/' + 'saving_photo.jpg')
-            await bot.send_message(msg.from_user.id, 'Удалил все файлы')
-        except:
-            FileNotFoundError
+        clean_massiv()
+        await bot.send_message(msg.from_user.id, 'Удалил все файлы')
+        # try:
+        #     os.remove(a[0])
+        #     os.remove(a[1])
+        #     os.remove('/app/' + 'saving_photo.jpg')
+        #     await bot.send_message(msg.from_user.id, 'Удалил все файлы')
+        # except:
+        #     FileNotFoundError
 
 
 @dp.message_handler()

@@ -88,16 +88,10 @@ async def handle_docs_photo(msg):
         a.clear()
         await bot.send_message(msg.from_user.id, 'Очистил массив')
 
-    # download_dir = './img/'
-    # if not os.path.exists(download_dir):
-    #     os.makedirs(download_dir)
-    #     await bot.send_message(msg.from_user.id, 'Создал папку  ' + str(os.getcwd()))
-    # os.chdir(download_dir)
-
     # '/app'
     await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
 
-    img_name = 'img' + str(msg.from_user.id) + '_' + str(len(a)) + '.jpg'
+    img_name = 'img' + '_' + str(len(a)) + '.jpg'
     path_to_img = os.getcwd() + '/' + img_name
     a.append(path_to_img)
     await msg.photo[-1].download(path_to_img)

@@ -123,6 +123,8 @@ async def echo(message: types.Message):
     elif "Удалить файл:" in message.text:
         os.remove(message.text.split(':')[1])
         await message.reply("Удалил")
+    elif ".jpg" in message.text:
+        await bot.send_photo(message.from_user.id, types.InputFile('/app/' + message.text))
     else:
         await message.reply(message.text)
 

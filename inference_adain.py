@@ -46,11 +46,9 @@ def denorm(tensor, device):
 # print(f'result saved into files starting with {output_name}')
 
 
-def transfering_style(massiv_photo, bot, msg):
-    await bot.send_message(msg.from_user.id, 'Зашел в обработку в функцию transfering_style')
+def transfering_style(massiv_photo):
     model = model_adain.Model()
     model.load_state_dict(torch.load('20_epoch.pth', map_location=torch.device('cpu')))
-    await bot.send_message(msg.from_user.id, 'Загрузил модель из памяти')
     c = Image.open(massiv_photo[1])
     s = Image.open(massiv_photo[0])
     c_tensor = trans(c).unsqueeze(0).to(device)
@@ -59,5 +57,4 @@ def transfering_style(massiv_photo, bot, msg):
     with torch.no_grad():
         out = model.generate(c_tensor, s_tensor, alpha)
     out = denorm(out, device)
-    await bot.send_message(msg.from_user.id, 'Получил аутпут и сейчас верну его')
     return out

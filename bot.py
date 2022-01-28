@@ -34,7 +34,8 @@ async def send_welcome(message: types.Message):
         "Привет! Я могу перенести стиль с одной картинки на другую. "
         "Пришли мне две фотографии: с первой фотографии я попробую перенсти "
         "стиль на вторую, и отправлю получившееся изображение Вам в ответ. "
-        "Если что, то обработка в среднем занимает не больше 30 секунд.  Я сейчас в директории " + str(os.getcwd())
+        "Если что, то обработка может занимать достаточно много времени (более 2-3х минут). "
+        "Я сейчас в директории "
     )
 
 
@@ -48,6 +49,7 @@ async def send_help(message: types.Message):
         " обработал предыдущие. Чтобы проверить, что бот работает, Вы можете написать "
         "любое сообщение и бот пришлет его Вам в ответ."
     )
+
 
 @dp.message_handler(commands=['file_in_directory'])
 async def handle_docs_dir(message: types.Message):
@@ -65,9 +67,22 @@ async def handle_docs_dir(message: types.Message):
 a = []
 dct = {}
 
+
+@dp.message_handler(commands=['clean_massiv'])
+async def clean_massiv(message: types.Message):
+    global a
+    a = []
+    await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
+    files = os.listdir(os.getcwd())
+    for file in files:
+        if ".jpg" in file:
+            await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
+            os.remove('/app/' + file)
+
+
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
-    random_number = random.randint(0, 10000)
+    # random_number = random.randint(0, 10000)
 
     if len(a) == 2:
         a.clear()
@@ -82,7 +97,7 @@ async def handle_docs_photo(msg):
     # '/app'
     await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
 
-    img_name = 'img' + str(msg.from_user.id) + str(random_number) + '.jpg'
+    img_name = 'img' + str(msg.from_user.id) + '_' + str(len(a)) + '.jpg'
     path_to_img = os.getcwd() + '/' + img_name
     a.append(path_to_img)
     await msg.photo[-1].download(path_to_img)

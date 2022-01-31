@@ -50,20 +50,33 @@ async def send_help(message: types.Message):
     )
 
 
-@dp.message_handler(commands=['file_in_directory'])
-async def handle_docs_dir(message: types.Message):
-    await message.reply('Я сейчас в директории: ' + os.getcwd())
-    # files = os.listdir(os.getcwd())
-    # for file in files:
-    #     await message.reply('Файл : ' + file)
+# @dp.message_handler(commands=['file_in_directory'])
+# async def handle_docs_dir(message: types.Message):
+#     await message.reply('Я сейчас в директории: ' + os.getcwd())
+# files = os.listdir(os.getcwd())
+# for file in files:
+#     await message.reply('Файл : ' + file)
 
 
 a = []
 dct = {}
 
 
-@dp.message_handler(commands=['clean_massiv'])
-def clean_massiv(message: types.Message):
+@dp.message_handler(commands=['clean'])
+def clean():
+    global a
+    a = []
+    # await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
+    files = os.listdir(os.getcwd())
+    for file in files:
+        if ".jpg" in file:
+            # await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
+            os.remove('/app/' + file)
+            # await bot.send_message(message.from_user.id, file)
+
+
+@dp.message_handler(commands=['cleaning'])
+def clean_1(message: types.Message):
     global a
     a = []
     await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
@@ -71,19 +84,19 @@ def clean_massiv(message: types.Message):
     for file in files:
         if ".jpg" in file:
             await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
-            # os.remove('/app/' + file)
+            os.remove('/app/' + file)
             await bot.send_message(message.from_user.id, file)
 
-@dp.message_handler(commands=['example'])
-def exe(message: types.Message):
-    await bot.send_message(message.from_user.id, 'Проверка функции. Все работает!!!')
+
+# @dp.message_handler(commands=['example'])
+# def exe(message: types.Message):
+#     await bot.send_message(message.from_user.id, 'Проверка функции. Все работает!!!')
 
 
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
-
     if len(a) >= 2:
-        clean_massiv()
+        clean()
         await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # '/app'
@@ -104,7 +117,7 @@ async def handle_docs_photo(msg):
         start_time = time.time()
         out = transfering_style(a)
         end_time = time.time()
-        await bot.send_message(msg.from_user.id, 'Инференс занял: ' + str(end_time-start_time))
+        await bot.send_message(msg.from_user.id, 'Инференс занял: ' + str(end_time - start_time))
         await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
         await bot.send_message(msg.from_user.id, 'Закончил обработку')
 
@@ -116,7 +129,7 @@ async def handle_docs_photo(msg):
 
         await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img))
         await bot.send_message(msg.from_user.id, 'Фото готово и прислано Вам')
-        clean_massiv()
+        clean()
         await bot.send_message(msg.from_user.id, 'Удалил все файлы')
         # try:
         #     os.remove(a[0])

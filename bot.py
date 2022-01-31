@@ -72,7 +72,11 @@ def clean_massiv(message: types.Message):
         if ".jpg" in file:
             await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
             # os.remove('/app/' + file)
-            print(file)
+            await bot.send_message(message.from_user.id, file)
+
+@dp.message_handler(commands=['example'])
+def exe(message: types.Message):
+    await bot.send_message(message.from_user.id, 'Проверка функции. Все работает!!!')
 
 
 @dp.message_handler(content_types=['photo'])

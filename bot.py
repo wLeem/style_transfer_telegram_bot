@@ -67,6 +67,7 @@ a = []
 dct = {}
 
 
+
 @dp.message_handler(commands=['clean_massiv'])
 def clean_massiv(message: types.Message):
     global a

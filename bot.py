@@ -67,16 +67,15 @@ a = []
 dct = {}
 
 
-
 @dp.message_handler(commands=['clean_massiv'])
 def clean_massiv(message: types.Message):
     global a
     a = []
-    await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
+    # await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
     files = os.listdir(os.getcwd())
     for file in files:
         if ".jpg" in file:
-            await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
+            # await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
             os.remove('/app/' + file)
 
 

@@ -34,7 +34,7 @@ async def send_welcome(message: types.Message):
         "Привет! Я могу перенести стиль с одной картинки на другую. "
         "Как это работает?! Пришли мне две фотографии: с первой фотографии я попробую перенести "
         "стиль на вторую, и отправлю получившееся изображение Вам в ответ. "
-        "Если что, то обработка обработка не должна занимать много времени (как правило меньше 30 секнд)."
+        "Если что, то обработка не должна занимать много времени (как правило меньше 30 секнд)."
     )
 
 
@@ -103,19 +103,22 @@ async def handle_docs_photo(msg):
     img_name = 'img' + '_' + str(len(a)) + '.jpg'
     path_to_img = os.getcwd() + '/' + img_name
     a.append(path_to_img)
-    # await bot.send_message(msg.from_user.id, 'В массив а добавлен элемент: ' + path_to_img)
+    if len(a) == 1:
+        await bot.send_message(msg.from_user.id, 'Фото получил, с него будем переносить стиль. Жду второе фото!')
     await msg.photo[-1].download(path_to_img)
     # await bot.send_message(msg.from_user.id, 'Длина массива сейчас ' + str(len(a)))
     if len(a) == 2:
+        await bot.send_message(msg.from_user.id, 'Второе фото получено, начиная обработку, '
+                                                 'пожалуйста подождите чуть-чуть!')
         # await bot.send_message(msg.from_user.id, 'Зашел в обработку')
         # await bot.send_message(msg.from_user.id, 'Начал обработку')
         # await bot.send_message(msg.from_user.id, 'Длина массива в цикле при переносе ' + str(len(a)))
         # await bot.send_message(msg.from_user.id, 'Первый элемент ' + a[0])
         # await bot.send_message(msg.from_user.id, 'Второй элемент  ' + a[1])
-        start_time = time.time()
+        # start_time = time.time()
         out = transfering_style(a)
-        end_time = time.time()
-        await bot.send_message(msg.from_user.id, 'Инференс занял: ' + str(end_time - start_time))
+        # end_time = time.time()
+        # await bot.send_message(msg.from_user.id, 'Инференс занял: ' + str(end_time - start_time))
         # await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
         await bot.send_message(msg.from_user.id, 'Закончил обработку, сейчас пришлю получившееся изображение')
 

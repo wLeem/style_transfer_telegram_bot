@@ -32,9 +32,9 @@ async def on_shutdown(dp):
 async def send_welcome(message: types.Message):
     await message.reply(
         "Привет! Я могу перенести стиль с одной картинки на другую. "
-        "Пришли мне две фотографии: с первой фотографии я попробую перенсти "
+        "Как это работает?! Пришли мне две фотографии: с первой фотографии я попробую перенести "
         "стиль на вторую, и отправлю получившееся изображение Вам в ответ. "
-        "Если что, то обработка может занимать достаточно много времени (но не более 2-3х минут)."
+        "Если что, то обработка обработка не должна занимать много времени (как правило меньше 30 секнд)."
     )
 
 
@@ -50,12 +50,15 @@ async def send_help(message: types.Message):
     )
 
 
-# @dp.message_handler(commands=['file_in_directory'])
-# async def handle_docs_dir(message: types.Message):
-#     await message.reply('Я сейчас в директории: ' + os.getcwd())
-# files = os.listdir(os.getcwd())
-# for file in files:
-#     await message.reply('Файл : ' + file)
+@dp.message_handler(commands=['file_in_directory'])
+async def handle_docs_dir(message: types.Message):
+    # await message.reply('Я сейчас в директории: ' + os.getcwd())
+    files = os.listdir(os.getcwd())
+    strk = ""
+    for file in files:
+        strk += file
+        strk += "; "
+    await message.reply('Файлы в рабочей директории :\n ' + strk)
 
 
 a = []
@@ -73,8 +76,8 @@ def clean():
             # await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
             os.remove('/app/' + file)
             # await bot.send_message(message.from_user.id, file)
-#
-#
+
+
 # @dp.message_handler(commands=['cleaning'])
 # def clean_1(message: types.Message):
 #     global a
@@ -88,38 +91,33 @@ def clean():
 #             await bot.send_message(message.from_user.id, file)
 
 
-# @dp.message_handler(commands=['example'])
-# def exe(message: types.Message):
-#     await bot.send_message(message.from_user.id, 'Проверка функции. Все работает!!!')
-
-
 @dp.message_handler(content_types=['photo'])
 async def handle_docs_photo(msg):
     if len(a) >= 2:
         clean()
-        await bot.send_message(msg.from_user.id, 'Очистил массив')
+        # await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # '/app'
-    await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
+    # await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
 
     img_name = 'img' + '_' + str(len(a)) + '.jpg'
     path_to_img = os.getcwd() + '/' + img_name
     a.append(path_to_img)
-    await bot.send_message(msg.from_user.id, 'В массив а добавлен элемент: ' + path_to_img)
+    # await bot.send_message(msg.from_user.id, 'В массив а добавлен элемент: ' + path_to_img)
     await msg.photo[-1].download(path_to_img)
-    await bot.send_message(msg.from_user.id, 'Длина массива сейчас ' + str(len(a)))
+    # await bot.send_message(msg.from_user.id, 'Длина массива сейчас ' + str(len(a)))
     if len(a) == 2:
-        await bot.send_message(msg.from_user.id, 'Зашел в обработку')
-        await bot.send_message(msg.from_user.id, 'Начал обработку')
-        await bot.send_message(msg.from_user.id, 'Длина массива в цикле при переносе ' + str(len(a)))
-        await bot.send_message(msg.from_user.id, 'Первый элемент ' + a[0])
-        await bot.send_message(msg.from_user.id, 'Второй элемент  ' + a[1])
+        # await bot.send_message(msg.from_user.id, 'Зашел в обработку')
+        # await bot.send_message(msg.from_user.id, 'Начал обработку')
+        # await bot.send_message(msg.from_user.id, 'Длина массива в цикле при переносе ' + str(len(a)))
+        # await bot.send_message(msg.from_user.id, 'Первый элемент ' + a[0])
+        # await bot.send_message(msg.from_user.id, 'Второй элемент  ' + a[1])
         start_time = time.time()
         out = transfering_style(a)
         end_time = time.time()
         await bot.send_message(msg.from_user.id, 'Инференс занял: ' + str(end_time - start_time))
-        await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
-        await bot.send_message(msg.from_user.id, 'Закончил обработку')
+        # await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
+        await bot.send_message(msg.from_user.id, 'Закончил обработку, сейчас пришлю получившееся изображение')
 
         out = out.cpu().clone().detach()
 
@@ -130,12 +128,12 @@ async def handle_docs_photo(msg):
         await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img))
         await bot.send_message(msg.from_user.id, 'Фото готово и прислано Вам')
         clean()
-        await bot.send_message(msg.from_user.id, 'Удалил все файлы')
+        # await bot.send_message(msg.from_user.id, 'Удалил все файлы')
         try:
             os.remove(a[0])
             os.remove(a[1])
             os.remove('/app/' + 'saving_photo.jpg')
-            await bot.send_message(msg.from_user.id, 'Удалил все файлы')
+            # await bot.send_message(msg.from_user.id, 'Удалил все файлы')
         except:
             FileNotFoundError
 
@@ -144,13 +142,14 @@ async def handle_docs_photo(msg):
 async def echo(message: types.Message):
     if message.text == 'Привет' or message.text == 'привет':
         await message.reply("И Вам привет! "
-                            "Если хотите узнать, что я могу напишите '/start' или '/help'. "
+                            "Если хотите узнать, что я могу напишите '/start'. Если что-то не получается"
+                            " напишите '/help'. "
                             "Либо можем просто поболтать, Вы отправляйте сообщение, а я буду повторять!")
-    elif "Удалить файл:" in message.text:
-        os.remove(message.text.split(':')[1])
-        await message.reply("Удалил")
-    elif ".jpg" in message.text:
-        await bot.send_photo(message.from_user.id, types.InputFile('/app/' + message.text))
+    # elif "Удалить файл:" in message.text:
+    #     os.remove(message.text.split(':')[1])
+    #     await message.reply("Удалил")
+    # elif ".jpg" in message.text:
+    #     await bot.send_photo(message.from_user.id, types.InputFile('/app/' + message.text))
     else:
         await message.reply(message.text)
 

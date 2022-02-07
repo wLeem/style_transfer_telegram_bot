@@ -82,7 +82,7 @@ def clean(message: types.Message):
 async def handle_docs_photo(msg):
     if len(a) >= 2:
         clean()
-        # await bot.send_message(msg.from_user.id, 'Очистил массив')
+        await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # '/app'
     # await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))

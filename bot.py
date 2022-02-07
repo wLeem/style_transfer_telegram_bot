@@ -85,7 +85,7 @@ async def handle_docs_photo(msg):
         await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # '/app'
-    # await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
+    await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
 
     img_name = 'img' + '_' + str(len(a)) + '.jpg'
     path_to_img = os.getcwd() + '/' + img_name

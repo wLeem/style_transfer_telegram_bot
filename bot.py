@@ -64,7 +64,7 @@ a = []
 dct = {}
 
 
-# @dp.message_handler(commands=['clean'])
+@dp.message_handler(commands=['clean'])
 def clean():
     global a
     a = []
@@ -121,7 +121,7 @@ async def handle_docs_photo(msg):
             os.remove(a[1])
             os.remove('/app/' + 'saving_photo.jpg')
             await bot.send_message(msg.from_user.id, 'Удалил все файлы')
-        except FileNotFoundError:
+        except:
             pass
 
 

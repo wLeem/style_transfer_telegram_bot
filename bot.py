@@ -82,7 +82,7 @@ async def handle_docs_photo(msg):
         await bot.send_message(msg.from_user.id, 'Очистил массив')
 
     # '/app'
-    await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
+    # await bot.send_message(msg.from_user.id, 'Я сейчас в директории ' + str(os.getcwd()))
 
     img_name = 'img' + '_' + str(len(a)) + '.jpg'
     path_to_img = os.getcwd() + '/' + img_name
@@ -116,13 +116,13 @@ async def handle_docs_photo(msg):
         await bot.send_message(msg.from_user.id, 'Фото готово и прислано Вам')
         clean()
         # await bot.send_message(msg.from_user.id, 'Удалил все файлы')
-        try:
-            os.remove(a[0])
-            os.remove(a[1])
-            os.remove('/app/' + 'saving_photo.jpg')
-            await bot.send_message(msg.from_user.id, 'Удалил все файлы')
-        except:
-            pass
+        # try:
+        os.remove(a[0])
+        os.remove(a[1])
+        os.remove('/app/' + 'saving_photo.jpg')
+        await bot.send_message(msg.from_user.id, 'Удалил все файлы')
+        # except:
+        #     pass
 
 
 @dp.message_handler()

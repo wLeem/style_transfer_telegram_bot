@@ -49,15 +49,15 @@ async def send_help(message: types.Message):
     )
 
 
-# @dp.message_handler(commands=['file_in_directory'])
-# async def handle_docs_dir(message: types.Message):
-#     # await message.reply('Я сейчас в директории: ' + os.getcwd())
-#     files = os.listdir(os.getcwd())
-#     strk = ""
-#     for file in files:
-#         strk += file
-#         strk += "; "
-#     await message.reply('Файлы в рабочей директории :\n ' + strk)
+@dp.message_handler(commands=['file_in_directory'])
+async def handle_docs_dir(message: types.Message):
+    # await message.reply('Я сейчас в директории: ' + os.getcwd())
+    files = os.listdir(os.getcwd())
+    strk = ""
+    for file in files:
+        strk += file
+        strk += "; "
+    await message.reply('Файлы в рабочей директории :\n ' + strk)
 
 
 a = []
@@ -70,7 +70,7 @@ def clean():
     # await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
     files = os.listdir(os.getcwd())
     for file in files:
-        if '.jpg' in file or '.png' in file:
+        if '.jpg' in file:
             os.remove('/app/' + file)
 
 

@@ -64,7 +64,7 @@ a = []
 dct = {}
 
 
-@dp.message_handler(commands=['clean'])
+@dp.message_handler(commands=['cleaning'])
 async def cleaning(message: types.Message):
     global a
     a = []
@@ -73,7 +73,7 @@ async def cleaning(message: types.Message):
     for file in files:
         if ".jpg" or ".png" in file:
             await bot.send_message(message.from_user.id, 'Элемент ' + file)
-            os.remove('/app/' + file)
+            # os.remove('/app/' + file)
 
 
 def clean():
@@ -107,9 +107,9 @@ async def handle_docs_photo(msg):
                                                  'пожалуйста подождите чуть-чуть!')
         # await bot.send_message(msg.from_user.id, 'Зашел в обработку')
         # await bot.send_message(msg.from_user.id, 'Начал обработку')
-        # await bot.send_message(msg.from_user.id, 'Длина массива в цикле при переносе ' + str(len(a)))
-        # await bot.send_message(msg.from_user.id, 'Первый элемент ' + a[0])
-        # await bot.send_message(msg.from_user.id, 'Второй элемент  ' + a[1])
+        await bot.send_message(msg.from_user.id, 'Длина массива в цикле при переносе ' + str(len(a)))
+        await bot.send_message(msg.from_user.id, 'Первый элемент ' + a[0])
+        await bot.send_message(msg.from_user.id, 'Второй элемент  ' + a[1])
         start_time = time.time()
         out = transfering_style(a)
         end_time = time.time()

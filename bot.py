@@ -2,7 +2,6 @@ from torchvision.utils import save_image
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 import os
-import random
 # import cv2
 # from nst import transforming
 from inference_adain import transfering_style

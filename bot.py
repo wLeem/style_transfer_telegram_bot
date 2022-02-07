@@ -102,7 +102,7 @@ async def handle_docs_photo(msg):
         end_time = time.time()
         # await bot.send_message(msg.from_user.id, 'Изобр ' + str(out.shape))
         await bot.send_message(msg.from_user.id, 'Закончил обработку, сейчас пришлю получившееся изображение')
-        await bot.send_message(msg.from_user.id, 'Обработка заняла: ' + str(end_time - start_time))
+        await bot.send_message(msg.from_user.id, 'Обработка заняла: ' + str(round(end_time - start_time, 2)) + ' сек.')
 
         out = out.cpu().clone().detach()
 

@@ -65,6 +65,17 @@ dct = {}
 
 
 @dp.message_handler(commands=['clean'])
+async def cleaning(message: types.Message):
+    global a
+    a = []
+    await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
+    files = os.listdir(os.getcwd())
+    for file in files:
+        if ".jpg" or ".png" in file:
+            await bot.send_message(message.from_user.id, 'Элемент ' + file)
+            os.remove('/app/' + file)
+
+
 def clean():
     global a
     a = []
@@ -114,13 +125,14 @@ async def handle_docs_photo(msg):
 
         await bot.send_photo(msg.from_user.id, types.InputFile(path_save_img))
         await bot.send_message(msg.from_user.id, 'Фото готово и прислано Вам')
-        clean()
+        # clean()
         # await bot.send_message(msg.from_user.id, 'Удалил все файлы')
         # try:
         os.remove(a[0])
         os.remove(a[1])
         os.remove('/app/' + 'saving_photo.jpg')
         await bot.send_message(msg.from_user.id, 'Удалил все файлы')
+        clean()
         # except:
         #     pass
 

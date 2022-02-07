@@ -64,16 +64,14 @@ a = []
 dct = {}
 
 
-@dp.message_handler(commands=['clean'])
-def clean(message: types.Message):
+# @dp.message_handler(commands=['clean'])
+def clean():
     global a
     a = []
-    await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
+    # await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
     files = os.listdir(os.getcwd())
     for file in files:
         if ".jpg" or ".png" in file:
-            await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил ' +
-                                   str('/app/' + file))
             os.remove('/app/' + file)
 
 

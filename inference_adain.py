@@ -22,30 +22,6 @@ def denorm(tensor, device):
     return res
 
 
-# model = model_adain.Model()
-#     if model_state_path is not None:
-#         model.load_state_dict(torch.load(model_state_path, map_location=lambda storage, loc: storage))
-#     model = model.to(device)
-
-# model.load_state_dict(torch.load(''))
-
-# c = Image.open('')
-# s = Image.open('')
-
-# c_tensor = trans(c).unsqueeze(0).to(device)
-# s_tensor = trans(s).unsqueeze(0).to(device)
-# alpha = 1
-# with torch.no_grad():
-#     out = model.generate(c_tensor, s_tensor, alpha)
-
-# out = denorm(out, device)
-
-# output_name = '.'
-# save_image(out, f'{output_name}.jpg', nrow=1)
-
-# print(f'result saved into files starting with {output_name}')
-
-
 def transfering_style(massiv_photo):
     model = model_adain.Model()
     model.load_state_dict(torch.load('30_epoch_new_model.pth', map_location=torch.device('cpu')))

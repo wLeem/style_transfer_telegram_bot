@@ -66,16 +66,16 @@ dct = {}
 
 
 @dp.message_handler(commands=['clean'])
-def clean():
+def clean(message: types.Message):
     global a
     a = []
-    # await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
+    await bot.send_message(message.from_user.id, 'Зашел в функцию по удалению элементов')
     files = os.listdir(os.getcwd())
     for file in files:
         if ".jpg" or ".png" in file:
-            # await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил')
+            await bot.send_message(message.from_user.id, 'Зашел в цикл в функции по удалению элементов и удалил ' +
+                                   str('/app/' + file))
             os.remove('/app/' + file)
-            # await bot.send_message(message.from_user.id, file)
 
 
 @dp.message_handler(content_types=['photo'])
@@ -123,8 +123,8 @@ async def handle_docs_photo(msg):
             os.remove(a[0])
             os.remove(a[1])
             os.remove('/app/' + 'saving_photo.jpg')
-            # await bot.send_message(msg.from_user.id, 'Удалил все файлы')
-        except:
+            await bot.send_message(msg.from_user.id, 'Удалил все файлы')
+        except FileNotFoundError:
             pass
 
 

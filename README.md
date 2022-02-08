@@ -10,7 +10,7 @@ where the transfer of styles is implemented using the gram matrix. Such a networ
 (several minutes for a 512x512 photo). I decided to use other networks and approaches to style transfer and found Adain for myself.
 [Model presentation ](https://www.youtube.com/watch?v=IIRxJvW6bE4&t=304s)
 
-In my work I use piece of irasin implementation: [original implementation ](https://github.com/irasin/Pytorch_AdaIN)
+In my work I use piece of irasin implementation: [original implementation ](https://github.com/irasin/Pytorch_AdaIN).
 [My code of training NN ](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/training/training_adain.ipynb)
 This model processes photos many times faster (inference isn't more than 25 seconds) and the size of the resulting photo is larger than 512x512.
 

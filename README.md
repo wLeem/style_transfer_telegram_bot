@@ -20,6 +20,7 @@ This model processes photos many times faster (inference isn't more than 25 seco
 ![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_21.jpg)
 ![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_31.jpg)
 ![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_41.jpg)
+![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/content_1.jpg)
 
 
 ## Telegram bot + Heroku

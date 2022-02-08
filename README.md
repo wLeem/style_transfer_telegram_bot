@@ -16,7 +16,7 @@ This model processes photos many times faster (inference isn't more than 25 seco
 
 ### Results
 
-![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_1.png)
+![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_11.png)
 ![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_2.png)
 ![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_3.png)
 ![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_4.png)

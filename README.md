@@ -24,5 +24,19 @@ This model processes photos many times faster (inference isn't more than 25 seco
 
 ## Telegram bot + Heroku
 
+@project_dl_bot [link ](https://t.me/project_dl_bot)
+
 A [simple bot ](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/telegram_bot/bot.py) with asynchronous functions on webhook.
 Processes sent photos, reacts only to some messages in a special way, the rest is simply forwarded (echo).
+
+### Libraries: [requirements.txt](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/telegram_bot/requirements.txt)
+
+### Work process:
+- 1 Telegram bot **bot.py** gets 2 images (1st - style image, 2nd - content images) 
+- 2 Saves to folder on heroku server
+- 3 **inference_adain.py** gets images
+  - 3.1 Transform
+  - 3.2 Pretrained [AdaIn NN ](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/telegram_bot/30_epoch_new_model.pth) transfer style
+  - 3.3 Saves resulting image to folder on heroku server
+- 4 Bot sends resulting image
+- 5 Deletes all images

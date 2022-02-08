@@ -15,7 +15,12 @@ In my work I use piece of irasin implementation: [original implementation ](http
 This model processes photos many times faster (inference isn't more than 25 seconds) and the size of the resulting photo is larger than 512x512.
 
 ### Results
-![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/img/content1.jpg) ![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/img/style1.jpg) ![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/img/res1.jpg)
+
+![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_1.png)
+![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_2.png)
+![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_3.png)
+![image](https://github.com/wLeem/style_transfer_telegram_bot/tree/main/img/collage_4.png)
+
 
 ## Telegram bot + Heroku
 

@@ -1,15 +1,15 @@
 Здравствуйте! Оставлю здесь небольшие комментарии по проекту.
 Что в файлах:
 1. [bot.py](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/telegram_bot/bot.py) - основной файл, содержащий всю реализацию функционала бота, из него "вызывается" функция обработки фото
-	а. Реагирует на команды /start, /help - выводит основную основную информацию по функционалу бота
+	- а. Реагирует на команды /start, /help - выводит основную основную информацию по функционалу бота
 	   ![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/report/img1.png)
-	b. Реагирует на присланную фотографию боту, причем по-разному, если это первая, или вторая фотография.
+	- b. Реагирует на присланную фотографию боту, причем по-разному, если это первая, или вторая фотография.
 	   ![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/report/img2.png)
 	   ![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/report/img3.png)
 	   ![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/report/img4.png)
 	   Фотографии сохраняются на сервере, в массив записываю
 	   путь к фото. Когда длина массива == 2, т.е. прислано 2 фото, бот начинает обработку, после чего удаляет фото и очищает массив.
-	с. Реагирует на сообщения "привет", "пока" определенными сообщениями, остальные просто дублирует.
+	- с. Реагирует на сообщения "привет", "пока" определенными сообщениями, остальные просто дублирует.
 	   ![image](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/report/img5.png)
 
 2. [model_adain.py](https://github.com/wLeem/style_transfer_telegram_bot/blob/main/telegram_bot/model_adain.py) - реализация модели, которая будет переносить стили.
